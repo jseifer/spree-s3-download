@@ -18,11 +18,7 @@ class DownloadsController < Spree::BaseController
     @s3_download_set = S3DownloadSet.new(:user => current_user, :product => @product, :id => params[:id])
     @download = @s3_download_set.s3_objects.first
     if @s3_download_set.valid?
-      if session[:download_preference] == 'alternate'
-        send_file "#{File.expand_path(RAILS_ROOT)}/downloads/#{@download.filename}", :x_sendfile => true
-      else
-        redirect_to @s3_download_set.s3_objects.first.temporary_url and return
-      end
+      redirect_to @s3_download_set.s3_objects.first.temporary_url and return
     else
       render :status => 401
     end

@@ -1,0 +1,21 @@
+<div class="s3_product">
+	<table cellspacing="5" width="400">
+		<tr>
+			<th colspan="2">Associate S3 Objects</th>
+		</tr>
+		<tr>
+			<th><%= f.label :title %></th><td><%= f.text_field :title %></td>
+		</tr>
+		<tr>
+			<th><%= f.label :s3_url %></th><td><%= f.text_field :s3_url %></td>
+		</tr>
+		
+		<tr>
+			<th valign="top"><%= f.label :description %></th><td><%= f.text_area :description, :rows => 5, :cols => 35 %></td>
+		</tr>
+		<tr>
+			<td colspan="2"><%# BROKEN f.add_associated_link "Add Another Object", @product.s3_products.build %></td>
+		</tr>
+	</table>
+	
+</div>

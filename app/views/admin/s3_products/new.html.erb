@@ -1,0 +1,5 @@
+<h2>Add S3 Object for &quot;<%= @product.name %>&quot;</h2>
+<% form_for :s3_product, :url => admin_product_s3_products_path(@product), :method => :post do |f| %>
+	<%= render :partial => 'form', :locals => {:f => f} %>
+	<%= submit_tag "Create" %>
+<% end %>

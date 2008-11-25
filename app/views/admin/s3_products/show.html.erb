@@ -1,0 +1,7 @@
+<h2><%= @product.name %> &raquo; S3 Object Info</h2><br />
+<h3><%= @s3_product.title %></h3>
+<p><%= link_to @s3_product.s3_url, @s3_product.s3_url %></p>
+<p><%= @s3_product.description %></p>
+
+<%= link_to "Edit", edit_admin_product_s3_product_path(@product, @s3_product) %> |
+<%= link_to "Delete", admin_product_s3_product_path(@product, @s3_product), :method => :delete, :confirm => "Really?" %>

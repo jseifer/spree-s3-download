@@ -1,0 +1,35 @@
+<h2 class="heading">My Account</h2>
+<p class="heading"><a href="/" title="Continue Shopping &raquo;">Continue Shopping &raquo;</a></p>
+<div class="contentTop"></div>
+<div class="contentMid">
+  
+  <div class="account">
+  <ul>
+    <li><%= link_to "Logout", '/logout' %></li>
+    <li><%= link_to "Edit User Information", edit_user_path(current_user) %></li>
+  </ul>
+  </div>
+
+</div>
+<div class="contentBtm"></div>
+
+  <h2 class="heading"><%= link_to 'My Account', account_path %> &raquo; &quot;<%= @product.name %>&quot; Downloads</h2>
+  <p class="heading"></p>
+  <div class="contentTop"></div>
+  <div class="contentMid">
+
+	<table class="cart noTopMargin" summary="Shopping Cart" cellspacing="0">
+		<tr>
+			<th class="left">Title</th>
+			<th class="left">Description</th>
+			<th class="right">Download Link</th>
+		</tr>
+		<% for s3_product in @s3_download_set.s3_objects %>
+    <tr>
+      <td><%= s3_product.title %></td>
+			<td><%= s3_product.description %></td>
+      <td class="right" align="right"><%= link_to 'Download', s3_product.temporary_url %></td>
+    </tr>
+    <% end %>
+	</table>
+</div>

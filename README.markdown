@@ -1,9 +1,9 @@
-= Spree S3 Product Extension
+# Spree S3 Product Extension
 
 The Spree S3 product extension lets you easily add downloads to your spree 
 application.
 
-== How to use:
+## How to use:
 
 This has to go in the "vendor/spree/vendor/extensions" from your project
 root.
@@ -16,12 +16,12 @@ There's a sample in the config/initializers/s3.rb.  It supports the S3 gem
 convention of having environment variables: AMAZON_ACCESS_KEY_ID and 
 AMAZON_SECRET_ACCESS_KEY respectively.  So create it:
 
-S3Options = {
-  :access_key_id     => (ENV['AMAZON_ACCESS_KEY_ID'] || 'SECRET'),
-  :secret_access_key => (ENV['AMAZON_SECRET_ACCESS_KEY'] || 'SECRET'),
-  :product_bucket    => 'envycasts',
-  :url_valid_for     => 15.minutes
-}
+		S3Options = {
+		  :access_key_id     => (ENV['AMAZON_ACCESS_KEY_ID'] || 'SECRET'),
+		  :secret_access_key => (ENV['AMAZON_SECRET_ACCESS_KEY'] || 'SECRET'),
+		  :product_bucket    => 'envycasts',
+		  :url_valid_for     => 15.minutes
+		}
 
 The string you put in "product_bucket" is where the S3DownloadSet model will
 look for your s3 files.  The "url_valid_for" option only work when you create 
@@ -32,24 +32,24 @@ of time you specify in 'url_valid_for'.
 Once you migrate and configure you need to add your associated s3 products.
 You can put a link in your product, say your edit view:
 
-<%= link_to "Add S3 Object to &quot;#{@product.name}&quot;", 
-    new_admin_product_s3_products_path(@product) %>
+		<%= link_to "Add S3 Object to &quot;#{@product.name}&quot;", 
+		    new_admin_product_s3_products_path(@product) %>
 
 And link to your s3 products this way:
 
-<%= link_to "Edit S3 Objects for &quot;#{@product.name}&quot;", 
-    admin_product_s3_products_path(@product) %>
+		<%= link_to "Edit S3 Objects for &quot;#{@product.name}&quot;", 
+		    admin_product_s3_products_path(@product) %>
 
-== Linking to your downloads
+## Linking to your downloads
 
 You have two options.  Option 1: Individual download link.  This will
 create a temporary url for just one s3 product.  Where ever you want to
 link to your users s3 download, just do this in your view (this assumes
 you have the "product" variable set to a completed order product variant):
 
-<% for s3_product in product.s3_products %>
-<%= link_to s3_product.title, download_individual_path(product, s3_product) %>
-<% end %>
+		<% for s3_product in product.s3_products %>
+		<%= link_to s3_product.title, download_individual_path(product, s3_product) %>
+		<% end %>
 
 The downloads controller automatically generates the s3 download set object
 for you.
@@ -57,24 +57,24 @@ for you.
 Option 2 is to create a download set and iterate through that.  In your
 controller:
 
-@s3_set = S3DownloadSet.new(:user => user, 
-						:product => product,
- 						:url_generation => 'bulk')
+		@s3_set = S3DownloadSet.new(:user => user, 
+								:product => product,
+		 						:url_generation => 'bulk')
 
 In your view:
 
-<% for s3_object in @s3_set %>
-  <%= link_to s3_object.name, s3_object.temporary_url %>
-<% end %>
+		<% for s3_object in @s3_set %>
+		  <%= link_to s3_object.name, s3_object.temporary_url %>
+		<% end %>
 
-== Notes:
+## Notes:
 
 This doesn't provide any upload functionality.  You can use one of the many
 s3 clients to do that.  Just make sure you don't set the permissions of your
 file to be public.
 
 
-== License
+## License
 
 The MIT License
 

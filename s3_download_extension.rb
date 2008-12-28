@@ -1,6 +1,6 @@
-class S3ProductExtension < Spree::Extension
+class S3DownloadExtension < Spree::Extension
   version "1.0"
-  description "S3 Product Extension"
+  description "S3 Download Extension"
   url "http://www.railsenvy.com"
 
   define_routes do |map|
@@ -47,7 +47,7 @@ class S3ProductExtension < Spree::Extension
       }
       
       named_scope :completed_bare, {
-        :conditions => {:status => Order::Status::PAID},
+        :conditions => {:status => :checkout_complete},
         :order => 'created_at desc'
       }
     end

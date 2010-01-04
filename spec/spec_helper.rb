@@ -50,7 +50,7 @@ module S3Helper
   def create_product(options={})
     product = Product.new({
       :name => "Test product",
-      :master_price => 1.00,
+      :price => 1.00,
       :description => 'The best product in the world.',
       :available_on => 5.minutes.ago.to_s(:db)
     }.merge(options))

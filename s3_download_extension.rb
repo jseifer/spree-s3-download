@@ -3,27 +3,10 @@ class S3DownloadExtension < Spree::Extension
   description "S3 Download Extension"
   url "http://www.railsenvy.com"
 
-  define_routes do |map|
-    map.downloads '/downloads/:product_id', :controller => 'downloads', :action => 'index'
-    map.download_individual '/downloads/:product_id/:id', :controller => 'downloads', :action => 'show'
-    
-    map.namespace :admin do |admin|
-      admin.resources :products, :has_many => [:s3_products]
-    end
-  end
-
   # Register the s3 extension module for product class to have a clean activation of it.
   module ProductS3Extension
     def self.included(base)
-      base.send(:include, ProductS3Extension::ClassMethods)
       base.has_many :s3_products
-      include ProductS3Extension::InstanceMethods
-    end
-    
-    module ClassMethods
-    end
-    
-    module InstanceMethods
     end
   end
   

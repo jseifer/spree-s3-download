@@ -10,6 +10,7 @@ unless defined? SPREE_ROOT
     require "#{File.expand_path(File.dirname(__FILE__) + "/../../../../")}/config/environment"
   end
 end
+
 require "#{SPREE_ROOT}/spec/spec_helper"
 
 if File.directory?(File.dirname(__FILE__) + "/scenarios")
@@ -25,7 +26,7 @@ Spec::Runner.configure do |config|
   # config.fixture_path = RAILS_ROOT + '/spec/fixtures'
 
   # You can declare fixtures for each behaviour like this:
-  #   describe "...." do
+  #   describe "...." do 
   #     fixtures :table_a, :table_b
   #
   # Alternatively, if you prefer to declare them only once, you can

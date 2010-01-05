@@ -50,7 +50,7 @@ module S3Helper
   def create_product(options={})
     product = Product.new({
       :name => "Test product",
-      :price => 1.00,
+      :price => 19.99,
       :description => 'The best product in the world.',
       :available_on => 5.minutes.ago.to_s(:db)
     }.merge(options))
@@ -68,16 +68,44 @@ module S3Helper
       :description => 'an s3 product'
     }.merge(options))
   end
-  
-  def create_complete_order(user, product, options={})
-    return nil unless user && product
-    line_item = LineItem.new(:variant => product.variants.first, :quantity => 1, :price => 1)
-    order = user.orders.new
-    order.line_items.push(line_item)
-    order.status = Order::Status::AUTHORIZED
+
+def create_line_item(variant)
+  line_item = LineItem.new(:quantity => 1)
+  line_item.variant = variant
+  line_item.price = 19.99
+  line_item.save!
+  line_item
+end
+
+# this is approximative and need to be checked  
+def create_complete_order(user, product, options={})
+  returning(user.orders.create) do |order|
+    order.line_items.push create_line_item(product.variants.first)
     order.save
-    order
+    order.checkout.bill_address =  Address.new({
+        :firstname => "First",
+        :lastname => "Last",
+        :address1 => "Address1",
+        :city => "City",
+        :state_name => "A State",
+        :zipcode => "00000",
+        :country => Country.new,
+        :phone => "00000000"
+      })
+    order.complete
+    order.save!
   end
+end   
+  
+#  def create_complete_order(user, product, options={})
+#    return nil unless user && product
+#    line_item = LineItem.new(:variant => product.variants.first, :quantity => 1, :price => 1)
+#    order = user.orders.new
+#    order.line_items.push(line_item)
+ #   order.status = Order::Status::AUTHORIZED
+#    order.save
+#    order
+#  end
   
   def create_user_and_product_and_order
     @user = create_user

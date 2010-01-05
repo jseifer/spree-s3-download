@@ -2,9 +2,9 @@ require File.dirname(__FILE__) + '/../spec_helper'
 
 describe S3DownloadSet do
   before(:all) do
-    AWS::S3::Base.stub(:establish_connection!).and_return(true)
-    AWS::S3::Bucket.stub(:find).and_return(mock('s3 bucket'))
-    AWS::S3::S3Object.stub(:url_for).and_return('http://test.url')
+    AWS::S3::Base.stub!(:establish_connection, :return => true)
+    AWS::S3::Bucket.stub!(:find, :return => mock("s3 bucket"))
+    AWS::S3::S3Object.stub!(:url_for, :return => 'http://test.url')
   end
   
   describe "downloading an individual file" do

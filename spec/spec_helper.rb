@@ -39,6 +39,10 @@ Spec::Runner.configure do |config|
 end
 
 module S3Helper
+  def stub_s3
+    
+  end
+  
   def create_user(options={})
     User.create({
       :email => 'joe@blow.com',
@@ -96,16 +100,6 @@ def create_complete_order(user, product, options={})
     order.save!
   end
 end   
-  
-#  def create_complete_order(user, product, options={})
-#    return nil unless user && product
-#    line_item = LineItem.new(:variant => product.variants.first, :quantity => 1, :price => 1)
-#    order = user.orders.new
-#    order.line_items.push(line_item)
- #   order.status = Order::Status::AUTHORIZED
-#    order.save
-#    order
-#  end
   
   def create_user_and_product_and_order
     @user = create_user

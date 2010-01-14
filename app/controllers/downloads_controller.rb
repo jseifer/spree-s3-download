@@ -3,13 +3,13 @@ class DownloadsController < Spree::BaseController
   before_filter :find_product
 
   def index
-    @s3_download_set = S3DownloadSet.new(:user => current_user, :product => @product, :download_type => 'bulk')
+    @s3_download_set = S3DownloadSet.new(:user => current_user, :product => @product, :url_generation => 'bulk')
     respond_to do |format|
       if @s3_download_set.valid?
         format.html
       else
         flash[:notice] = "I'm sorry, there was a problem with that request.  If this problem was unexpected, please email support@envycasts.com"
-        redirect_to account_path and return
+        redirect_to user_path(current_user) and return
       end
     end
   end
@@ -23,6 +23,7 @@ class DownloadsController < Spree::BaseController
       render :status => 401
     end
   end
+  
   
   private
     def find_product

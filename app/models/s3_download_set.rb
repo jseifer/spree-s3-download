@@ -32,11 +32,11 @@ private
     s3_product.temporary_url = generate_url(s3_product)
     @s3_objects.push(s3_product)
   end
-
+  
   def fetch_bulk
     @options[:product].s3_products.each do |s3_product|
       s3_product.temporary_url = generate_url(s3_product)
-      @s3_objects.push(s3_objects)
+      @s3_objects.push(s3_product)
     end
   end
 

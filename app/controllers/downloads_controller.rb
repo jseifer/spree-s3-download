@@ -1,5 +1,5 @@
 class DownloadsController < Spree::BaseController
-  before_filter :login_required
+  before_filter :require_user
   before_filter :find_product
 
   def index

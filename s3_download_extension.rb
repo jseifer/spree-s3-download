@@ -35,11 +35,11 @@ class S3DownloadExtension < Spree::Extension
       }
     end
     
-    Admin::ProductsController.class_eval do
-      before_filter :initialize_extension_partials
-      def initialize_extension_partials
-        @extension_partials ||= Array.new
-        @extension_partials.push('admin/s3_products/embed')
+    Admin::ProductsController.class_eval do 
+      before_filter :add_s3_product_admin_tab
+      
+      def add_s3_product_admin_tab
+        @product_admin_tabs << {:name => 'S3 Downloadables', :url => 'admin_product_s3_products_url'}
       end
     end
   end

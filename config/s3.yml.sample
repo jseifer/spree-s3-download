@@ -1,4 +1,5 @@
-access_key_id: KEY   
-secret_access_key: SECRET
-product_bucket: bucket_name
-url_valid_for: 900
+production:
+  access_key_id: KEY   
+  secret_access_key: SECRET
+  product_bucket: bucket_name
+  url_valid_for: 900

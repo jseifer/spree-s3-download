@@ -3,6 +3,10 @@ class S3DownloadExtension < Spree::Extension
   description "S3 Download Extension"
   url "http://www.railsenvy.com"
 
+  def self.require_gems(config)
+    config.gem 'right_aws'
+  end
+
   # Register the s3 extension module for product class to have a clean activation of it.
   module ProductS3Extension
     def self.included(base)

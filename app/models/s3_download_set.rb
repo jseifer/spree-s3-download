@@ -1,4 +1,3 @@
-require 'aws/s3'
 class S3DownloadSet
   attr_accessor :user, :product, :bucket, :urls
   attr_reader :s3_objects
@@ -40,15 +39,12 @@ private
     end
   end
 
+
   def connect
-    AWS::S3::Base.establish_connection!(
-      :access_key_id     => S3Options[:access_key_id],
-      :secret_access_key => S3Options[:secret_access_key]
-    )
-    @bucket = AWS::S3::Bucket.find(S3Options[:product_bucket])
+    @aws = RightAws::S3Interface.new(S3Options[:access_key_id], S3Options[:secret_access_key], :logger => Rails.logger)
   end
   
   def generate_url(item)
-    AWS::S3::S3Object.url_for(item.filename, S3Options[:product_bucket], :authenticated => true, :expires_in => S3Options[:url_valid_for])
+    @aws.get_link(S3Options[:product_bucket], item.filename, S3Options[:url_valid_for])
   end
 end

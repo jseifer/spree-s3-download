@@ -5,7 +5,7 @@ class AddS3Products < ActiveRecord::Migration
       t.integer :product_id
       t.string :description
       t.string :s3_url
-    end    
+    end
     add_index :s3_products, :product_id
   end
 

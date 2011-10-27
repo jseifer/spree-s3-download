@@ -1,6 +1,6 @@
 # Spree S3 Product Extension
 
-The Spree S3 product extension lets you easily add downloads to your spree 
+The Spree S3 product extension lets you easily add downloads to your spree
 application.
 
 ## How to use:
@@ -11,9 +11,9 @@ root.
 First off, run the 'db:migrate' task.  There's a migration in the db directory
 that will create a s3_products table that's associated with products.
 
-In your project root (not Spree root), create config/initializers/s3.rb.  
+In your project root (not Spree root), create config/initializers/s3.rb.
 There's a sample in the config/initializers/s3.rb.  It supports the S3 gem
-convention of having environment variables: AMAZON_ACCESS_KEY_ID and 
+convention of having environment variables: AMAZON_ACCESS_KEY_ID and
 AMAZON_SECRET_ACCESS_KEY respectively.  So create it:
 
 		S3Options = {
@@ -24,7 +24,7 @@ AMAZON_SECRET_ACCESS_KEY respectively.  So create it:
 		}
 
 The string you put in "product_bucket" is where the S3DownloadSet model will
-look for your s3 files.  The "url_valid_for" option only work when you create 
+look for your s3 files.  The "url_valid_for" option only work when you create
 a bulk download set.  A bulk download set will go through a product and its
 associated S3 files and generate temporary urls that are valid for the amount
 of time you specify in 'url_valid_for'.
@@ -32,12 +32,12 @@ of time you specify in 'url_valid_for'.
 Once you migrate and configure you need to add your associated s3 products.
 You can put a link in your product, say your edit view:
 
-		<%= link_to "Add S3 Object to &quot;#{@product.name}&quot;", 
+		<%= link_to "Add S3 Object to &quot;#{@product.name}&quot;",
 		    new_admin_product_s3_products_path(@product) %>
 
 And link to your s3 products this way:
 
-		<%= link_to "Edit S3 Objects for &quot;#{@product.name}&quot;", 
+		<%= link_to "Edit S3 Objects for &quot;#{@product.name}&quot;",
 		    admin_product_s3_products_path(@product) %>
 
 ## Linking to your downloads
@@ -57,7 +57,7 @@ for you.
 Option 2 is to create a download set and iterate through that.  In your
 controller:
 
-		@s3_set = S3DownloadSet.new(:user => user, 
+		@s3_set = S3DownloadSet.new(:user => user,
 								:product => product,
 		 						:url_generation => 'bulk')
 

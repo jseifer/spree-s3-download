@@ -13,7 +13,7 @@ class DownloadsController < Spree::BaseController
       end
     end
   end
-  
+
   def show
     @s3_download_set = S3DownloadSet.new(:user => current_user, :product => @product, :id => params[:id])
     @download = @s3_download_set.s3_objects.first
@@ -23,8 +23,8 @@ class DownloadsController < Spree::BaseController
       render :status => 401
     end
   end
-  
-  
+
+
   private
     def find_product
       @product = Product.find_by_param(params[:product_id])

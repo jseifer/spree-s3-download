@@ -9,7 +9,7 @@
 		<tr>
 			<th><%= f.label :s3_url %></th><td><%= f.text_field :s3_url %></td>
 		</tr>
-		
+
 		<tr>
 			<th valign="top"><%= f.label :description %></th><td><%= f.text_area :description, :rows => 5, :cols => 35 %></td>
 		</tr>
@@ -17,5 +17,5 @@
 			<td colspan="2"><%# BROKEN f.add_associated_link "Add Another Object", @product.s3_products.build %></td>
 		</tr>
 	</table>
-	
+
 </div>

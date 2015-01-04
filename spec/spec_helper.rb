@@ -26,7 +26,7 @@ Spec::Runner.configure do |config|
   # config.fixture_path = RAILS_ROOT + '/spec/fixtures'
 
   # You can declare fixtures for each behaviour like this:
-  #   describe "...." do 
+  #   describe "...." do
   #     fixtures :table_a, :table_b
   #
   # Alternatively, if you prefer to declare them only once, you can
@@ -40,9 +40,9 @@ end
 
 module S3Helper
   def stub_s3
-    
+
   end
-  
+
   def create_user(options={})
     User.create({
       :email => 'joe@blow.com',
@@ -58,13 +58,13 @@ module S3Helper
       :description => 'The best product in the world.',
       :available_on => 5.minutes.ago.to_s(:db)
     }.merge(options))
-    
+
     variant = Variant.new(:product => product)
     product.variants.push(variant)
     product.save
     product
   end
-  
+
   def create_s3_object_for_product(product, options={})
     product.s3_products.create({
       :title => "s3 product",
@@ -81,7 +81,7 @@ def create_line_item(variant)
   line_item
 end
 
-# this is approximative and need to be checked  
+# this is approximative and need to be checked
 def create_complete_order(user, product, options={})
   returning(user.orders.create) do |order|
     order.line_items.push create_line_item(product.variants.first)
@@ -99,8 +99,8 @@ def create_complete_order(user, product, options={})
     order.complete
     order.save!
   end
-end   
-  
+end
+
   def create_user_and_product_and_order
     @user = create_user
     @product = create_product
